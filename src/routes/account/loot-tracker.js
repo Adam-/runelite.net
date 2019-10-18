@@ -12,6 +12,7 @@ import { bindActionCreators } from 'redux'
 import prepare from '../../components/prepare'
 import { wikiURLForItem } from '../../util'
 import SearchBar from '../../components/search-bar'
+import { fetchPrices } from '../../modules/prices'
 
 const getRlIcon = id => `https://static.runelite.net/cache/item/icon/${id}.png`
 
@@ -92,7 +93,9 @@ const buildLootRecord = record => (
   <div class="card loot-card">
     <div class="card-header">
       {record.name}
-      <span class="small float-right">x {record.count}</span>
+      <span class="small float-right">
+        x {record.count} price {record.price}
+      </span>
     </div>
     <div class="card-body pt-0 pb-0 record-body">
       <div class="row drop-row">{record.drops.map(buildDrop)}</div>
@@ -131,6 +134,7 @@ const mapDispatchToProps = dispatch =>
   )
 
 const prepareComponentData = async ({ fetchLoot }) => {
+  await fetchPrices()
   await fetchLoot()
 }
 

@@ -62,7 +62,7 @@ export default handleActions(
   {
     [setGe]: (state, { payload }) => ({
       ...state,
-      data: uniq(concat(state.data, payload))
+      data: payload
     }),
     [setGeRange]: (state, { payload }) => ({
       ...state,
