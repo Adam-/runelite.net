@@ -22,6 +22,7 @@ import GrandExchange from './account/grand-exchange'
 import LootTracker from './account/loot-tracker'
 import NotFound from '../components/not-found'
 import './account.scss'
+import { getPrices } from '../modules/prices'
 
 const menu = [
   {
@@ -181,7 +182,8 @@ const mapStateToProps = (state, props) => ({
   slayerTask: getSlayerTask(state),
   bossLog: getBossLog(state),
   rawGe: getGe(state),
-  rawLoot: getLoot(state)
+  rawLoot: getLoot(state),
+  prices: getPrices(state)
 })
 
 const mapDispatchToProps = dispatch =>

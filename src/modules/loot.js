@@ -3,6 +3,7 @@ import api from '../api'
 import { getLatestRelease } from './git'
 import { createSelector } from 'reselect'
 import { flattenMap } from '../util'
+import { getPrices } from './prices'
 
 const runeliteApi = api('https://api.runelite.net/')
 const runeliteStaticApi = api('https://static.runelite.net/')
@@ -118,7 +119,8 @@ export const getFilteredLoot = createSelector(
 
 export const getGroupedLoot = createSelector(
   getFilteredLoot,
-  loot => {
+  getPrices,
+  (loot, prices) => {
     const groupedLoot = new Map()
 
     const mergeDrops = (existingDrops, newDrops) => {
@@ -131,17 +133,34 @@ export const getGroupedLoot = createSelector(
         for (let groupedItem of groupedItems) {
           if (item.id === groupedItem.id) {
             groupedItem.qty += item.qty
+            //	     groupedItem.price += item.price
             found = true
             break
           }
         }
 
         if (!found) {
-          groupedItems.push({ ...item })
+          groupedItems.push({
+            ...item
+            //		  price: 42,//prices[item.id] * item.qty
+          })
         }
       }
 
       return groupedItems
+    }
+
+    const getPrice = drops => {
+      let total = 0
+      console.log('get the price')
+      console.log(prices)
+      for (let drop of drops) {
+        let price = prices[drop.id]
+        if (!isNaN(price)) {
+          total += price * drop.qty
+        }
+      }
+      return total
     }
 
     for (let entry of loot) {
@@ -154,10 +173,18 @@ export const getGroupedLoot = createSelector(
         continue
       }
 
+      const mergedDrops = mergeDrops(entry.drops, [])
+      /*
+	    let total = 0
+	    for (let drop of mergedDrops) {
+		    total += drop.price
+	    }*/
+
       const newEntry = {
-        drops: mergeDrops(entry.drops, []),
+        drops: mergedDrops,
         type: entry.type,
-        count: 1
+        count: 1,
+        price: getPrice(mergedDrops)
       }
 
       groupedLoot.set(key, newEntry)

@@ -8,6 +8,7 @@ import lootReducer from './loot'
 import sessionReducer from './session'
 import tagReducer from './tag'
 import xpReducer from './xp'
+import pricesReducer from './prices'
 
 // Combine all redux reducers into one root reducer
 export default {
@@ -20,5 +21,6 @@ export default {
   loot: lootReducer,
   session: sessionReducer,
   tag: tagReducer,
-  xp: xpReducer
+  xp: xpReducer,
+  prices: pricesReducer
 }
