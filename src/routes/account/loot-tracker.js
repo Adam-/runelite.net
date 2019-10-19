@@ -129,13 +129,18 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       fetchReleases,
+      fetchPrices,
       fetchLoot,
       setLootFilter
     },
     dispatch
   )
 
-const prepareComponentData = async ({ fetchReleases, fetchLoot }) => {
+const prepareComponentData = async ({
+  fetchReleases,
+  fetchPrices,
+  fetchLoot
+}) => {
   await fetchReleases()
   await fetchPrices()
   await fetchLoot()

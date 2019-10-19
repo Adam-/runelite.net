@@ -18,7 +18,7 @@ export const { fetchPrices, setPrices } = createActions(
 
       let priceMap = {}
 
-      for (let item in prices) {
+      for (let item of prices) {
         priceMap[item.id] = item.price
       }
 
