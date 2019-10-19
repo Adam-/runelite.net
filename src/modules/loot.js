@@ -170,21 +170,15 @@ export const getGroupedLoot = createSelector(
         const existing = groupedLoot.get(key)
         existing.count += 1
         existing.drops = mergeDrops(existing.drops, entry.drops)
+        existing.price += getPrice(entry.drops)
         continue
       }
 
-      const mergedDrops = mergeDrops(entry.drops, [])
-      /*
-	    let total = 0
-	    for (let drop of mergedDrops) {
-		    total += drop.price
-	    }*/
-
       const newEntry = {
-        drops: mergedDrops,
+        drops: mergeDrops(entry.drops, []),
         type: entry.type,
         count: 1,
-        price: getPrice(mergedDrops)
+        price: getPrice(entry.drops)
       }
 
       groupedLoot.set(key, newEntry)

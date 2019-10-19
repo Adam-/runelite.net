@@ -127,6 +127,7 @@ const mapStateToProps = (state, props) => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
+      fetchPrices,
       fetchLoot,
       setLootFilter
     },
