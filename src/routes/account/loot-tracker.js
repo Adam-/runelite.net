@@ -94,7 +94,6 @@ const buildDrop = drop => (
 )
 
 const formatPrice = price => {
-  //	return price
   let [str, si] = numToQuantity(price)
   return str
 }
@@ -104,7 +103,7 @@ const buildLootRecord = record => (
     <div class="card-header">
       {record.name}
       <span class="small float-right">
-        x {record.count} price {formatPrice(record.price)}
+        x {record.count} ({formatPrice(record.price)})
       </span>
     </div>
     <div class="card-body pt-0 pb-0 record-body">
