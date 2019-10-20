@@ -94,7 +94,7 @@ const buildDrop = drop => (
 )
 
 const formatPrice = price => {
-  let [str, si] = numToQuantity(price)
+  let [str] = numToQuantity(price)
   return str
 }
 

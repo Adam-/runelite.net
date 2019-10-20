@@ -1,8 +1,6 @@
-import { uniq, concat } from 'ramda'
 import { createActions, handleActions } from 'redux-actions'
 import api from '../api'
 import { getLatestRelease } from './bootstrap'
-import { createSelector } from 'reselect'
 
 const runeliteApi = api('https://api.runelite.net/')
 
