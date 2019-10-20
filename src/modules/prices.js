@@ -1,7 +1,7 @@
 import { uniq, concat } from 'ramda'
 import { createActions, handleActions } from 'redux-actions'
 import api from '../api'
-import { getLatestRelease } from './git'
+import { getLatestRelease } from './bootstrap'
 import { createSelector } from 'reselect'
 
 const runeliteApi = api('https://api.runelite.net/')
@@ -10,7 +10,7 @@ const runeliteApi = api('https://api.runelite.net/')
 export const { fetchPrices, setPrices } = createActions(
   {
     FETCH_PRICES: () => async (dispatch, getState) => {
-      const version = getLatestRelease(getState()).name
+      const version = getLatestRelease(getState())
 
       const prices = await runeliteApi(`runelite-${version}/item/prices.js`, {
         method: 'GET'

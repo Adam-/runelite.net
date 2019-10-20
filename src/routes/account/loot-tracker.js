@@ -134,7 +134,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   )
 
-const prepareComponentData = async ({ fetchLoot }) => {
+const prepareComponentData = async ({ fetchPrices, fetchLoot }) => {
   await fetchPrices()
   await fetchLoot()
 }
