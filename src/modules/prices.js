@@ -12,7 +12,7 @@ export const { fetchPrices, setPrices } = createActions(
     FETCH_PRICES: () => async (dispatch, getState) => {
       const version = getLatestRelease(getState())
 
-      const prices = await runeliteApi(`runelite-1.5.36/item/prices.js`, {
+      const prices = await runeliteApi(`runelite-${version}/item/prices.js`, {
         method: 'GET'
       })
 
@@ -22,8 +22,6 @@ export const { fetchPrices, setPrices } = createActions(
         priceMap[item.id] = item.price
       }
 
-      console.log('downloaded prices')
-      console.log(priceMap)
       dispatch(setPrices(priceMap))
     }
   },

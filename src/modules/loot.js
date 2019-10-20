@@ -133,17 +133,13 @@ export const getGroupedLoot = createSelector(
         for (let groupedItem of groupedItems) {
           if (item.id === groupedItem.id) {
             groupedItem.qty += item.qty
-            //	     groupedItem.price += item.price
             found = true
             break
           }
         }
 
         if (!found) {
-          groupedItems.push({
-            ...item
-            //		  price: 42,//prices[item.id] * item.qty
-          })
+          groupedItems.push({ ...item })
         }
       }
 
@@ -152,8 +148,6 @@ export const getGroupedLoot = createSelector(
 
     const getPrice = drops => {
       let total = 0
-      console.log('get the price')
-      console.log(prices)
       for (let drop of drops) {
         let price = prices[drop.id]
         if (!isNaN(price)) {
