@@ -119,6 +119,11 @@ const menuExport = (currentMenu, props) => {
   )
 }
 
+const accountType = type => {
+  if (type === 'LEAGUE') return '(League)'
+  return ''
+}
+
 const accountMenu = (account, selectedAccount, changeAccount) => (
   <button
     class={
@@ -127,7 +132,8 @@ const accountMenu = (account, selectedAccount, changeAccount) => (
     }
     onClick={() => changeAccount(account)}
   >
-    <i class="fas fa-fw fa-user" /> {account}
+    <i class="fas fa-fw fa-user" /> {account.displayName}{' '}
+    {accountType(account.type)}
   </button>
 )
 
@@ -168,9 +174,11 @@ const Account = ({
               <p className="list-title">{accountsTitle}</p>
               <ul class="list-group list-group-small mb-4">
                 {currentMenu.showAccounts ? (
-                  accounts.map(a =>
-                    accountMenu(a, props.selectedAccount, changeAccount)
-                  )
+                  accounts
+                    .filter(a => a.displayName !== null)
+                    .map(a =>
+                      accountMenu(a, props.selectedAccount, changeAccount)
+                    )
                 ) : (
                   <noscript />
                 )}
